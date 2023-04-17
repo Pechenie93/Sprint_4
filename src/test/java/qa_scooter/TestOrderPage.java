@@ -1,8 +1,8 @@
 package qa_scooter;
 
-import Pages.MainPage;
-import Pages.SecondOrderPage;
-import Pages.FirstOrderPage;
+import pages.MainPage;
+import pages.SecondOrderPage;
+import pages.FirstOrderPage;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import static org.hamcrest.CoreMatchers.containsString;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 @RunWith(Parameterized.class)
 public class TestOrderPage {
@@ -38,40 +38,19 @@ public class TestOrderPage {
         this.phoneNumber = phoneNumber;
         this.dataFields = dataFields;
         this.commentField = commentField;
-}
+    }
 
     @Parameterized.Parameters
     public static Object[][] getCostumersData() {
-        return new Object[][] {
+        return new Object[][]{
                 //Проверям каждое поле формы для Chrome и FireFox на допустимость внесения кирилицы и латиницы
-                { "//div/button[@class='Button_Button__ra12g']","Сергей", "Иванович", "Ломоносова 7", "Чистые пруды", "89001234567", "31.12.2022", "Хорошо"},
-                { "//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Сергей", "Ианович", "Ломоносова 7", "Чистые пруды", "89001234567", "31.12.2022", "Хорошо"},
-                // Проверка поля Имя
-                /* {  "//div/button[@class='Button_Button__ra12g']","Ivanov", "Сергей", "Московская 10", "Павелецкая", "+79001234567","31.12.2022", "Всем спасибо!"},
-                 { "//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Ivanov", "Сергей", "Московская 10", "Павелецкая", "+79001234567","31.12.2022", "Всем спасибо!"},
-                 // Проверка поля Фамилия
-                 { "//div/button[@class='Button_Button__ra12g']","Петя", "Fox", "Краснодарская ул.10", "Киевская", "0987654321", "31.12.2022", "спасибо" },
-                 {"//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Петя", "Fox", "Краснодарская ул.10", "Киевская", "0987654321", "31.12.2022", "спасибо" },
-                 // Проверка поля Адрес
-                 { "//div/button[@class='Button_Button__ra12g']","Алена", "Иванова", "Street 25", "Электрозаводская", "0987654321", "31.12.2022", "Еще пиццы" },
-                 {"//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Алена", "Иванова", "Street 25", "Электрозаводская", "0987654321", "31.12.2022", "Еще пиццы" },
-                 // Проверка поля Станция метро
-                 { "//div/button[@class='Button_Button__ra12g']","Алена", "Иванова", "Григорьева д.123 кв 34", "Paveleckay", "0987654321", "31.12.2022", "Оставить у двери" },
-                 {"//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Алена", "Иванова", "Григорьева д.123 кв 34", "Paveleckay", "0987654321", "31.12.2022", "Оставить у двери" },
-                 //Проверка поля телефон
-                 { "//div/button[@class='Button_Button__ra12g']","Алена", "Иванова", "Григорьева д.123 кв 34", "Пушкинская", "МобNb1233", "31.12.2022", "Оставить у двери" },
-                 {"//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Алена", "Иванова", "Григорьева д.123 кв 34", "Пушкинская", "МобNb1233", "31.12.2022", "Оставить у двери" },
-                 // Проверка заказа не валидной датой
-                 { "//div/button[@class='Button_Button__ra12g']","Алена", "Иванова", "Григорьева д.123 кв 34", "Третьяковская", "89001234567", "31.12.2021", "Оставить у двери" },
-                 {"//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']","Алена", "Иванова", "Григорьева д.123 кв 34", "Третьяковская", "89001234567", "31.12.2021", "Оставить у двери" },
-                 // Проверка поля Коментарий
-                 { "//div/button[@class='Button_Button__ra12g']","Алена", "Иванова", "Григорьева д.123 кв 34", "Третьяковская", "89001234567", "31.12.2022", "Spasibo" },
-                 { "//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']", "Григорьева д.123 кв 34", "Третьяковская", "89001234567", "31.12.2022", "Spasibo" },*/
+                {"//div/button[@class='Button_Button__ra12g']", "Сергей", "Иванович", "Ломоносова 7", "Чистые пруды", "89001234567", "31.12.2022", "Хорошо"},
+                {"//div/button[@class='Button_Button__ra12g Button_UltraBig__UU3Lp']", "Сергей", "Ианович", "Ломоносова 7", "Чистые пруды", "89001234567", "31.12.2022", "Хорошо"},
         };
     }
 
     @Before
-    public void startDriver () {
+    public void startDriver() {
         //Драйвер
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
@@ -86,7 +65,7 @@ public class TestOrderPage {
     }
 
     @Test
-    public void testUpOrderButton ()  {
+    public void testUpOrderButton() {
         // создать объект класса главной страницы
         MainPage objMainPage = new MainPage(driver);
 
@@ -94,13 +73,13 @@ public class TestOrderPage {
         // создать объект класса 2 страницы заказа;
         FirstOrderPage firstOrderPage = new FirstOrderPage(driver);
         // Заполнить форму 1
-        firstOrderPage.fillFirstPage(firstName, secondName, streetName, metroStation,phoneNumber);
+        firstOrderPage.fillFirstPage(firstName, secondName, streetName, metroStation, phoneNumber);
         // Нажать кнопку Далее
         firstOrderPage.setNextButton();
         // создаем объект класса 3 страницы заказа
         SecondOrderPage secondOrderPage = new SecondOrderPage(driver);
         // Заполнили форму 2
-        secondOrderPage.fillSecondPage(dataFields,commentField);
+        secondOrderPage.fillSecondPage(dataFields, commentField);
         //Нажали кнопку заказать
         secondOrderPage.clickOrderBook();
         // нажатия кнопки подтверждения заказа
@@ -109,6 +88,7 @@ public class TestOrderPage {
         String orderText = secondOrderPage.getOrderSocsessText();
         MatcherAssert.assertThat(orderText, containsString("Заказ оформлен"));
     }
+
     @After
     public void quit() {
         driver.quit();
